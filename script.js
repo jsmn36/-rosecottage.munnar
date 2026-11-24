@@ -1,6 +1,6 @@
 const WA_NUMBER = '916238664107';
 const MAP_URL = 'https://maps.app.goo.gl/wzNQoZFeZnJxPyCf7';
-const PHOTO_COUNT = 34; // images/p1.jpg ... (missing ones are skipped automatically)
+const PHOTO_COUNT = 79; // images/p1.jpg ... (missing ones are skipped automatically)
 
 const $ = s => document.querySelector(s);
 document.getElementById('yr').textContent = new Date().getFullYear();

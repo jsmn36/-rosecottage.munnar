@@ -1,6 +1,13 @@
 const WA_NUMBER = '916238664107';
 const MAP_URL = 'https://maps.app.goo.gl/wzNQoZFeZnJxPyCf7';
-const PHOTO_COUNT = 79; // images/p1.jpg ... (missing ones are skipped automatically)
+// Gallery order: building exterior → rooms → bathrooms → balcony & views → others
+const PHOTO_ORDER = [
+  63, 64, 69, 70, 71, 65, 68, 66, 67, 57, 58, 59, 60, 61, 12, 8, 62,
+  1, 2, 3, 9, 10, 7, 13, 14, 15, 35, 36, 37, 44, 45, 46, 47, 48, 49, 50, 51, 54, 55, 42, 43, 20, 21,
+  5, 6, 16, 17, 18, 19, 38, 39, 40, 41, 52, 53,
+  4, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
+  11, 22, 23, 24, 56, 72, 73, 77, 78, 74, 75, 76, 79
+];
 
 const $ = s => document.querySelector(s);
 document.getElementById('yr').textContent = new Date().getFullYear();
@@ -13,7 +20,7 @@ document.querySelectorAll('#nav-links a').forEach(a => a.onclick = () => $('#nav
 
 // Gallery
 const masonry = $('#masonry');
-for (let i = 1; i <= PHOTO_COUNT; i++) {
+for (const i of PHOTO_ORDER) {
   const fig = document.createElement('figure');
   const img = new Image();
   img.loading = 'lazy';

@@ -170,13 +170,14 @@
       <input type="text" id="bk-name" placeholder="Full name" required>
     </label>
     <div class="row">
-      <label>Check-in date
+      <label>Check-in
         <input type="date" id="bk-date" required>
       </label>
-      <label>Number of nights
-        <div class="stepper"><button type="button" data-step="bk-nights" data-d="-1">−</button><input type="number" id="bk-nights" value="1" min="1" max="30"><button type="button" data-step="bk-nights" data-d="1">+</button></div>
+      <label>Check-out
+        <input type="date" id="bk-out" required>
       </label>
     </div>
+    <p class="nights-info" id="bk-nights-info"></p>
     <div class="row">
       <label>Adults
         <div class="stepper"><button type="button" data-step="bk-adults" data-d="-1">−</button><input type="number" id="bk-adults" value="2" min="1" max="20"><button type="button" data-step="bk-adults" data-d="1">+</button></div>

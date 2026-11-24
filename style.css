@@ -194,3 +194,4 @@ legend{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(
   .nav-brand span{display:none}
   .hero{padding-top:9rem}
 }
+.nights-info{margin:-.4rem 0 1rem;color:var(--accent);font-family:var(--serif);font-style:italic;font-size:1.1rem;min-height:1.2em}

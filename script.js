@@ -41,6 +41,19 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 const modal = $('#booking-modal');
 const dateIn = $('#bk-date');
 dateIn.min = new Date().toISOString().split('T')[0];
+const dateOut = $('#bk-out');
+const nightsBetween = () => dateIn.value && dateOut.value ? Math.round((new Date(dateOut.value) - new Date(dateIn.value)) / 864e5) : 0;
+const updateNights = () => {
+  if (dateIn.value) {
+    const next = new Date(dateIn.value); next.setDate(next.getDate() + 1);
+    dateOut.min = next.toISOString().split('T')[0];
+    if (!dateOut.value || dateOut.value < dateOut.min) dateOut.value = dateOut.min;
+  }
+  const n = nightsBetween();
+  $('#bk-nights-info').textContent = n > 0 ? `🌙 ${n} night${n > 1 ? 's' : ''} stay` : '';
+};
+dateIn.addEventListener('change', updateNights);
+dateOut.addEventListener('change', updateNights);
 const openModal = () => { modal.classList.add('open'); modal.setAttribute('aria-hidden', 'false'); };
 const closeModal = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); };
 document.querySelectorAll('[data-book]').forEach(b => b.addEventListener('click', openModal));
@@ -64,7 +77,8 @@ $('#booking-form').addEventListener('submit', e => {
   e.preventDefault();
   const name = $('#bk-name').value.trim();
   const date = dateIn.value;
-  const nights = +$('#bk-nights').value || 1;
+  const nights = nightsBetween();
+  if (nights < 1) { dateOut.classList.add('err'); setTimeout(() => dateOut.classList.remove('err'), 1500); return; }
   const adults = +$('#bk-adults').value || 1;
   const kids = +$('#bk-kids').value || 0;
   const food = foodBoxes.filter(c => c.checked).map(c => c.value);
@@ -77,8 +91,7 @@ $('#booking-form').addEventListener('submit', e => {
   }
 
   const fmt = d => new Date(d + 'T00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-  const out = new Date(date + 'T00:00'); out.setDate(out.getDate() + nights);
-  const checkout = out.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  const checkout = fmt(dateOut.value);
 
   const msg =
 `Hello Rose Cottage Munnar! 🌹
